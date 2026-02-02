@@ -43,7 +43,7 @@ def create_dummy_repo(src_path, dest_path):
     subprocess.check_call(["git", "add", "*"], cwd=dest_path)
     git_big_repo_name = "big-" * 17 + ".git"
     subprocess.check_call(
-        ["git", "remote", "add", "my_remote", f"git@github.com:/OCA/{git_big_repo_name}"], cwd=dest_path
+        ["git", "remote", "add", "my_remote", f"git@github.com:/BIZ4Africa/{git_big_repo_name}"], cwd=dest_path
     )
 
 

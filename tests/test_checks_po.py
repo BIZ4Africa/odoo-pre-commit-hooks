@@ -125,7 +125,7 @@ class TestChecksPO(common.ChecksCommon):
                     msg += f"#L{check_error.position.line}"
                 if check_error.message:
                     msg += f" {check_error.message}"
-                check_example_content += f"\n    - https://github.com/OCA/odoo-pre-commit-hooks/blob/v{version}/{msg}"
+                check_example_content += f"\n    - https://github.com/BIZ4Africa/odoo-pre-commit-hooks/blob/v{version}/{msg}"
         check_example_content = f"# Examples PO\n{check_example_content}"
         new_readme = self.re_replace(
             "[//]: # (start-example-po)", "[//]: # (end-example-po)", check_example_content, new_readme

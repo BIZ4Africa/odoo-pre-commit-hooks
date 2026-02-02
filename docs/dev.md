@@ -4,7 +4,7 @@ It is meant to serve as an introduction to new developers and a guideline for de
 new code will abide to these guidelines.
 
 ## Purpose
-Provide linters that complement [`pylint-odoo`](https://github.com/OCA/pylint-odoo). `pylint-odoo` is focused on
+Provide linters that complement [`pylint-odoo`](https://github.com/BIZ4Africa/pylint-odoo). `pylint-odoo` is focused on
 checking Python source code, which means linters in this project focus solely on the following types of files:
 
 * csv

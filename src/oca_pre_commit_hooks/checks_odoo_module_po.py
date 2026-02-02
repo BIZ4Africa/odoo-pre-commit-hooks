@@ -75,7 +75,7 @@ class ChecksOdooModulePO(BaseChecker):
 
     def _compute_pretty_contents(self):
         self.po_data.sort(key=lambda entry: entry.msgid)
-        # Ignore i18n_extra https://github.com/OCA/odoo-pre-commit-hooks/issues/100
+        # Ignore i18n_extra https://github.com/BIZ4Africa/odoo-pre-commit-hooks/issues/100
         if self.data_section != "i18n_extra":
             for entry in self.po_data:
                 if entry.msgid == entry.msgstr:
@@ -330,7 +330,7 @@ class ChecksOdooModulePO(BaseChecker):
             if entry.obsolete:
                 continue
 
-            # Ignore i18n_extra https://github.com/OCA/odoo-pre-commit-hooks/issues/122
+            # Ignore i18n_extra https://github.com/BIZ4Africa/odoo-pre-commit-hooks/issues/122
             if self.is_message_enabled("po-duplicate-message-definition") and self.data_section != "i18n_extra":
                 duplicated[hash(entry.msgid)].append(entry)
 

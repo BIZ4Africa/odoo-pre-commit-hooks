@@ -6,7 +6,7 @@ while :code:`id="oe_structure_my_unique_id"` is valid.
 
 Rationale
 *********
-The check was suggested in `this issue <https://github.com/OCA/odoo-pre-commit-hooks/issues/27>`_. Tags with
+The check was suggested in `this issue <https://github.com/BIZ4Africa/odoo-pre-commit-hooks/issues/27>`_. Tags with
 :code:`oe_structure` as their class are meant for users to edit them through the website builder. If the tag has no
 :code:`id`, the website will replace the entire original view with a copy that contains the user changes.
 This means updates to other parts of the view (through code, AKA updating a module) may not be reflected.

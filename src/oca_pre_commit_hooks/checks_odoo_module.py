@@ -14,7 +14,7 @@ from biz4a_pre_commit_hooks.base_checker import BaseChecker
 
 colorama_init(autoreset=True)
 
-DFTL_README_TMPL_URL = "https://github.com/OCA/maintainer-tools/blob/master/template/module/README.rst"  # noqa: B950
+DFTL_README_TMPL_URL = "https://github.com/BIZ4Africa/maintainer-tools/blob/master/template/module/README.rst"  # noqa: B950
 DFTL_README_FILES = ["README.md", "README.txt", "README.rst"]
 DFTL_MANIFEST_DATA_KEYS = ["data", "demo", "demo_xml", "init_xml", "qweb", "test", "update_xml"]
 MANIFEST_NAMES = ("__openerp__.py", "__manifest__.py")
@@ -162,7 +162,7 @@ class ChecksOdooModule(BaseChecker):
         Check if the component is too long
         Weblate have 100 characters limit for repository name + Odoo Version + module name
         e.g. The following module:
-            https://github.com/OCA/account-financial-reporting/tree/18.0/account_tax_balance
+            https://github.com/BIZ4Africa/account-financial-reporting/tree/18.0/account_tax_balance
         Generates the following component:
             account-financial-reporting-18.0-account_tax_balance
         """

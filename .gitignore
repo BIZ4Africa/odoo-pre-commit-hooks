@@ -73,7 +73,7 @@ docs/_build/
 *~
 *.swp
 
-# OCA rules
+# BIZ4Africa rules
 !static/lib/
 
 # Auto-generated

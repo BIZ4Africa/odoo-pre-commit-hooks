@@ -631,7 +631,7 @@ class ChecksOdooModuleXML(BaseChecker):
 
     def verify_template_prettier_incompatible(self, template, manifest_data):
         """There are text tags incompatible with prettier xml autofix
-        More info https://github.com/OCA/odoo-pre-commit-hooks/issues/149"""
+        More info https://github.com/BIZ4Africa/odoo-pre-commit-hooks/issues/149"""
         target_attrs = {"t-out", "t-esc", "t-raw"}
         for node_textarea in template.xpath(".//textarea"):
             if len(node_textarea_child := node_textarea.getchildren()) != 1:
@@ -923,7 +923,7 @@ class ChecksOdooModuleXML(BaseChecker):
         """* Check xml-oe-structure-missing-id
 
         Ensure all tags with class 'oe_structure' have an ID. For more information on the rationale, see:
-        https://github.com/OCA/odoo-pre-commit-hooks/issues/27
+        https://github.com/BIZ4Africa/odoo-pre-commit-hooks/issues/27
         """
         for manifest_data in self.manifest_datas:
             for xpath_node in self.xpath_oe_structure_woid(manifest_data["node"]):

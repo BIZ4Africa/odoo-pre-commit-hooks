@@ -1,7 +1,7 @@
 {
     'name': 'Manifest without version',
     'license': 'AGPL-3',
-    'author': 'Odoo Community Association (OCA)',
+    'author': 'Business Solutions For Africa (BIZ4A)',
     'depends': [
         'base',
     ],

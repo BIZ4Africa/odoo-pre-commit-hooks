@@ -146,7 +146,7 @@ class TestChecks(common.ChecksCommon):
                 msg = msg.replace("\n", " ").replace(f" {code} ", " ")
                 msg = ext2url.sub(r"\1#L\2", msg, count=1)
                 check_example_content += (
-                    f"\n    - https://github.com/OCA/odoo-pre-commit-hooks/blob/v{version}/test_repo/{msg}"
+                    f"\n    - https://github.com/BIZ4Africa/odoo-pre-commit-hooks/blob/v{version}/test_repo/{msg}"
                 )
         check_example_content = f"# Examples\n{check_example_content}"
         new_readme = self.re_replace(

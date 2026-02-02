@@ -8,8 +8,8 @@ from biz4a_pre_commit_hooks.utils import top_path
 CONFIG_NAME = ".biz4a_hooks.cfg"
 MSG_CTRL = "MESSAGES_CONTROL"
 
-ENABLE_ENV_VAR = "OCA_HOOKS_ENABLE"
-DISABLE_ENV_VAR = "OCA_HOOKS_DISABLE"
+ENABLE_ENV_VAR = "BIZ4A_HOOKS_ENABLE"
+DISABLE_ENV_VAR = "BIZ4A_HOOKS_DISABLE"
 
 
 def parse_csv(comma_sep_str):

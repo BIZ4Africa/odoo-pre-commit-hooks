@@ -32,5 +32,5 @@
     'installable': True,
     'name': 'Duplicated value',
     'active': True,  # Deprecated active key
-    "biz4a_data_manual": ["report/manual.xml"],  # Custom OCA key to disable file-not-used
+    "biz4a_data_manual": ["report/manual.xml"],  # Custom BIZ4A key to disable file-not-used
 }
