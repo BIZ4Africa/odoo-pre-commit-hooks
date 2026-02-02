@@ -11,8 +11,8 @@ from fixit.api import fixit_paths
 from fixit.config import collect_rules, parse_rule
 from fixit.ftypes import Config, Options
 
-from oca_pre_commit_hooks import utils
-from oca_pre_commit_hooks.base_checker import BaseChecker
+from biz4a_pre_commit_hooks import utils
+from biz4a_pre_commit_hooks.base_checker import BaseChecker
 
 MANIFEST_NAMES = ("__openerp__.py", "__manifest__.py")
 
@@ -61,7 +61,7 @@ class ChecksOdooModuleFixit(BaseChecker):
         return [
             (
                 parse_rule(
-                    f"{lint_rule.__module__.replace('fixit.local', '')}",
+                    f"{lint_rule.__module__.replace('fixit.lbiz4al', '')}",
                     Path(__file__).resolve().parent,
                 ),
                 lint_rule.name,

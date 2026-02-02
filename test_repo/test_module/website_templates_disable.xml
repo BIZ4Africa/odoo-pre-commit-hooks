@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- oca-hooks:disable=xml-deprecated-qweb-directive,
+    <!-- biz4a-hooks:disable=xml-deprecated-qweb-directive,
                    xml-not-valid-char-link -->
     <!-- Deprecated QWeb directive "t-esc-options". -->
     <template id="test_template_1" name="Test Template 1">

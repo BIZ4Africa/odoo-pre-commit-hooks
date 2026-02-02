@@ -13,8 +13,8 @@ Why does this file exist, and why not put this in __main__?
 
 import sys
 
-from oca_pre_commit_hooks import checks_odoo_module
-from oca_pre_commit_hooks.global_parser import GlobalParser
+from biz4a_pre_commit_hooks import checks_odoo_module
+from biz4a_pre_commit_hooks.global_parser import GlobalParser
 
 
 def main(argv=None):

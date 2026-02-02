@@ -10,8 +10,8 @@ from distutils.dir_util import copy_tree  # pylint:disable=deprecated-module
 
 import pytest
 
-from oca_pre_commit_hooks import utils
-from oca_pre_commit_hooks.global_parser import CONFIG_NAME, DISABLE_ENV_VAR, ENABLE_ENV_VAR
+from biz4a_pre_commit_hooks import utils
+from biz4a_pre_commit_hooks.global_parser import CONFIG_NAME, DISABLE_ENV_VAR, ENABLE_ENV_VAR
 
 RND = random.Random(987654321)
 
@@ -63,7 +63,7 @@ class ChecksCommon:
         # os.environ.pop(DISABLE_ENV_VAR, None)
 
     def setup_method(self, method):
-        self.tmp_dir = os.path.realpath(tempfile.mkdtemp(suffix="_oca_pre_commit_hooks"))
+        self.tmp_dir = os.path.realpath(tempfile.mkdtemp(suffix="_biz4a_pre_commit_hooks"))
         self.test_repo_path = self.tmp_dir
         create_dummy_repo(self.original_test_repo_path, self.tmp_dir)
 

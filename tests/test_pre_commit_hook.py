@@ -46,8 +46,8 @@ repos:
 
     def test_checks_hook_odoo_module(self):
         self.expected_errors = test_checks.EXPECTED_ERRORS.copy()
-        returncode, output, cmd_str = run_cmd(self.pre_commit_cmd + ["oca-checks-odoo-module"])
-        _returncode2, output2, _cmd_str2 = run_cmd(self.pre_commit_cmd + ["oca-checks-odoo-module-fixit"])
+        returncode, output, cmd_str = run_cmd(self.pre_commit_cmd + ["biz4a-checks-odoo-module"])
+        _returncode2, output2, _cmd_str2 = run_cmd(self.pre_commit_cmd + ["biz4a-checks-odoo-module-fixit"])
         # TODO: Check output2 is returning color if it is using color=never
         ansi = re.compile(r"\x1B\[[0-9;]*[A-Za-z]")
         output2 = ansi.sub("", output2)
@@ -60,7 +60,7 @@ repos:
 
     def test_checks_hook_po(self):
         self.expected_errors = test_checks_po.EXPECTED_ERRORS.copy()
-        self.pre_commit_cmd.append("oca-checks-po")
+        self.pre_commit_cmd.append("biz4a-checks-po")
         returncode, output, cmd_str = run_cmd(self.pre_commit_cmd)
         assert returncode, f"The process exited with code zero {returncode} {output}"
         errors_count = {code: output.count(code) for code in self.expected_errors}

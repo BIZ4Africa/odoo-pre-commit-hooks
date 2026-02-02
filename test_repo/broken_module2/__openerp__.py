@@ -2,7 +2,7 @@
 {
     'name': 'Broken module 2 for tests',
     'license': 'unknow license',  # unknow license
-    'author': 'Other,Odoo Community Association (OCA)',  # Missing oca author
+    'author': 'Other,Odoo Community Association (OCA)',  # Missing biz4a author
     'development_status': 'InvalidDevStatus',
     'website': 'https://odoo-community.org,https://odoo.com',
     'version': '1.0',

@@ -45,7 +45,7 @@ def generage_long_description():
 
 
 setup(
-    name="oca-odoo-pre-commit-hooks",
+    name="biz4a-odoo-pre-commit-hooks",
     version="0.2.20",
     license="LGPL-3.0-or-later",
     description="odoo-pre-commit-hooks to use in pre-commit-config.yml files",
@@ -91,9 +91,9 @@ setup(
     extras_require={},
     entry_points={
         "console_scripts": [
-            "oca-checks-odoo-module = oca_pre_commit_hooks.cli:main",
-            "oca-checks-odoo-module-fixit = oca_pre_commit_hooks.cli_fixit:main",
-            "oca-checks-po = oca_pre_commit_hooks.cli_po:main",
+            "biz4a-checks-odoo-module = biz4a_pre_commit_hooks.cli:main",
+            "biz4a-checks-odoo-module-fixit = biz4a_pre_commit_hooks.cli_fixit:main",
+            "biz4a-checks-po = biz4a_pre_commit_hooks.cli_po:main",
         ]
     },
 )

@@ -3,8 +3,8 @@ import os
 from collections import defaultdict
 from typing import Sequence, Set, Union
 
-from oca_pre_commit_hooks import utils
-from oca_pre_commit_hooks.base_checker import BaseChecker
+from biz4a_pre_commit_hooks import utils
+from biz4a_pre_commit_hooks.base_checker import BaseChecker
 
 
 class ChecksOdooModuleCSV(BaseChecker):

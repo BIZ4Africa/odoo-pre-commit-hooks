@@ -5,7 +5,7 @@ from fixit.config import collect_rules
 from fixit.ftypes import Config
 from fixit.testing import generate_lint_rule_test_cases
 
-from oca_pre_commit_hooks import utils
+from biz4a_pre_commit_hooks import utils
 
 
 class FixitTest(unittest.TestCase):

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- oca-hooks:disable=xml-dangerous-qweb-replace-low-priority -->
+    <!-- biz4a-hooks:disable=xml-dangerous-qweb-replace-low-priority -->
     <template id="my_template1" inherit_id="module.template">
         <xpath expr="//div[@role='search']" position="replace">
             <form/>

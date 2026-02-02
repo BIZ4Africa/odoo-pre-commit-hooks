@@ -8,14 +8,14 @@ from tempfile import TemporaryDirectory
 
 import pytest
 
-import oca_pre_commit_hooks
+import biz4a_pre_commit_hooks
 from . import common
 
 RE_CHECK_DOCSTRING = r"\* Check (?P<check>[\w|\-]+)"
 RE_CHECK_OUTPUT = r"\- \[(?P<check>[\w|-]+)\]"
 
 ALL_CHECK_CLASS = [
-    oca_pre_commit_hooks.checks_odoo_module_po.ChecksOdooModulePO,
+    biz4a_pre_commit_hooks.checks_odoo_module_po.ChecksOdooModulePO,
 ]
 
 EXPECTED_ERRORS = {
@@ -42,8 +42,8 @@ class TestChecksPO(common.ChecksCommon):
     def setup_method(self, method):
         super().setup_method(method)
         self.expected_errors = EXPECTED_ERRORS.copy()
-        self.checks_run = oca_pre_commit_hooks.checks_odoo_module_po.run
-        self.checks_cli_main = oca_pre_commit_hooks.cli_po.main
+        self.checks_run = biz4a_pre_commit_hooks.checks_odoo_module_po.run
+        self.checks_cli_main = biz4a_pre_commit_hooks.cli_po.main
 
     @pytest.mark.parametrize("check2disable", EXPECTED_ERRORS)
     def test_checks_disable_one_by_one_with_random_cli_env_conf(self, check2disable):
@@ -89,8 +89,8 @@ class TestChecksPO(common.ChecksCommon):
 
     @pytest.mark.skipif(not os.getenv("BUILD_README"), reason="BUILD_README environment variable not enabled")
     def test_build_docstring(self):
-        checks_found, checks_docstring = oca_pre_commit_hooks.utils.get_checks_docstring(
-            [oca_pre_commit_hooks.checks_odoo_module_po.ChecksOdooModulePO]
+        checks_found, checks_docstring = biz4a_pre_commit_hooks.utils.get_checks_docstring(
+            [biz4a_pre_commit_hooks.checks_odoo_module_po.ChecksOdooModulePO]
         )
 
         readme_path = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "README.md")
@@ -103,7 +103,7 @@ class TestChecksPO(common.ChecksCommon):
         )
 
         # Find a better way to get the --help string
-        help_content = subprocess.check_output(["oca-checks-po", "--help"], stderr=subprocess.STDOUT).decode(
+        help_content = subprocess.check_output(["biz4a-checks-po", "--help"], stderr=subprocess.STDOUT).decode(
             sys.stdout.encoding
         )
         help_content = f"# Help PO\n```bash\n{help_content}\n```"
@@ -115,7 +115,7 @@ class TestChecksPO(common.ChecksCommon):
         all_check_errors = self.checks_run(sorted(self.file_paths), no_exit=True, no_verbose=False)
         all_check_errors_by_code = self.get_grouped_errors(all_check_errors)
 
-        version = oca_pre_commit_hooks.__version__
+        version = biz4a_pre_commit_hooks.__version__
         check_example_content = ""
         for code in sorted(all_check_errors_by_code):
             check_example_content += f"\n\n * {code}\n"

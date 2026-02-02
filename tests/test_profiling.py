@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-import oca_pre_commit_hooks
+import biz4a_pre_commit_hooks
 from . import common
 from .test_checks import EXPECTED_ERRORS as MODULES_ERRORS
 from .test_checks_po import EXPECTED_ERRORS as PO_ERRORS
@@ -31,8 +31,8 @@ class TestProfiling:
         cls.po_files = cls.pofiles_from_repo(test_repo_path)
 
     def test_profile_checks_module(self, request):
-        checks_module_run = oca_pre_commit_hooks.cli.main
-        checks_module_run2 = oca_pre_commit_hooks.cli_fixit.main
+        checks_module_run = biz4a_pre_commit_hooks.cli.main
+        checks_module_run2 = biz4a_pre_commit_hooks.cli_fixit.main
         mp = pytest.MonkeyPatch()
         mp.setattr(sys, "argv", ["", "--no-exit", "--no-verbose"] + self.module_files)
         module_errors = MODULES_ERRORS.copy()
@@ -46,7 +46,7 @@ class TestProfiling:
             mp.undo()
 
     def test_profile_checks_po(self, request):
-        checks_po_run = oca_pre_commit_hooks.cli_po.main
+        checks_po_run = biz4a_pre_commit_hooks.cli_po.main
         mp = pytest.MonkeyPatch()
         mp.setattr(sys, "argv", ["", "--no-exit", "--no-verbose"] + self.po_files)
         try:
@@ -58,12 +58,12 @@ class TestProfiling:
     @pytest.mark.skipif(not environ.get("PROFILING_TEST_REPO"), reason="No custom repository set for profiling")
     def test_profile_checks_module_custom(self, request):
         manifests = self.manifests_from_repo(environ.get("PROFILING_TEST_REPO"))
-        checks_module_run = oca_pre_commit_hooks.cli.main
-        checks_module_run2 = oca_pre_commit_hooks.cli_fixit.main
+        checks_module_run = biz4a_pre_commit_hooks.cli.main
+        checks_module_run2 = biz4a_pre_commit_hooks.cli_fixit.main
         mp = pytest.MonkeyPatch()
         mp.setattr(sys, "argv", ["", "--no-exit", "--no-verbose"] + manifests)
         try:
-            print(f"Running oca-checks-odoo-module on {len(manifests)} manifests")
+            print(f"Running biz4a-checks-odoo-module on {len(manifests)} manifests")
             checks_module_run()
             checks_module_run2()
         finally:

@@ -8,14 +8,14 @@ from pathlib import Path
 
 import pytest
 
-import oca_pre_commit_hooks
+import biz4a_pre_commit_hooks
 from . import common
 
 ALL_CHECK_CLASS = [
-    oca_pre_commit_hooks.checks_odoo_module.ChecksOdooModule,
-    oca_pre_commit_hooks.checks_odoo_module_fixit.ChecksOdooModuleFixit,
-    oca_pre_commit_hooks.checks_odoo_module_csv.ChecksOdooModuleCSV,
-    oca_pre_commit_hooks.checks_odoo_module_xml.ChecksOdooModuleXML,
+    biz4a_pre_commit_hooks.checks_odoo_module.ChecksOdooModule,
+    biz4a_pre_commit_hooks.checks_odoo_module_fixit.ChecksOdooModuleFixit,
+    biz4a_pre_commit_hooks.checks_odoo_module_csv.ChecksOdooModuleCSV,
+    biz4a_pre_commit_hooks.checks_odoo_module_xml.ChecksOdooModuleXML,
 ]
 
 
@@ -69,13 +69,13 @@ class TestChecks(common.ChecksCommon):
         self.expected_errors = EXPECTED_ERRORS.copy()
 
     def checks_run(self, *args, **kwargs):
-        result = oca_pre_commit_hooks.checks_odoo_module.run(*args, **kwargs)
-        result += oca_pre_commit_hooks.checks_odoo_module_fixit.run(*args, **kwargs)
+        result = biz4a_pre_commit_hooks.checks_odoo_module.run(*args, **kwargs)
+        result += biz4a_pre_commit_hooks.checks_odoo_module_fixit.run(*args, **kwargs)
         return result
 
     def checks_cli_main(self, *args, **kwargs):
-        result = oca_pre_commit_hooks.cli.main(*args, **kwargs)
-        result2 = oca_pre_commit_hooks.cli_fixit.main(*args, **kwargs)
+        result = biz4a_pre_commit_hooks.cli.main(*args, **kwargs)
+        result2 = biz4a_pre_commit_hooks.cli_fixit.main(*args, **kwargs)
         return result + result2
 
     @pytest.mark.parametrize("check2disable", EXPECTED_ERRORS)
@@ -95,7 +95,7 @@ class TestChecks(common.ChecksCommon):
         # already installed in the OS (without latest dev changes)
         # and we do not have way to evaluate all checks are evaluated and documented from another side
         # Feel free to migrate to better place this non-standard section of the code
-        checks_found, checks_docstring = oca_pre_commit_hooks.utils.get_checks_docstring(ALL_CHECK_CLASS)
+        checks_found, checks_docstring = biz4a_pre_commit_hooks.utils.get_checks_docstring(ALL_CHECK_CLASS)
 
         readme_path = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "README.md")
         with open(readme_path, encoding="UTF-8") as f_readme:
@@ -110,7 +110,7 @@ class TestChecks(common.ChecksCommon):
         )
 
         # Find a better way to get the --help string
-        help_content = subprocess.check_output(["oca-checks-odoo-module", "--help"], stderr=subprocess.STDOUT).decode(
+        help_content = subprocess.check_output(["biz4a-checks-odoo-module", "--help"], stderr=subprocess.STDOUT).decode(
             sys.stdout.encoding
         )
         help_content = f"# Help\n```bash\n{help_content}\n```"
@@ -122,7 +122,7 @@ class TestChecks(common.ChecksCommon):
         all_check_errors = self.checks_run(sorted(self.file_paths), no_exit=True, no_verbose=False)
         all_check_errors_by_code = self.get_grouped_errors(all_check_errors)
 
-        version = oca_pre_commit_hooks.__version__
+        version = biz4a_pre_commit_hooks.__version__
         check_example_content = ""
         ansi_re = re.compile(
             r"""
@@ -174,7 +174,7 @@ class TestChecks(common.ChecksCommon):
         with open(fname_wrong_header, "rb") as f_wrong_header:
             content = f_wrong_header.read()
         assert not content.strip().startswith(
-            oca_pre_commit_hooks.checks_odoo_module_xml.XML_HEADER_EXPECTED
+            biz4a_pre_commit_hooks.checks_odoo_module_xml.XML_HEADER_EXPECTED
         ), "The XML wrong header was previously fixed"
 
         fname_wrong_xmlid_order = os.path.join(self.test_repo_path, "broken_module", "model_view_odoo2.xml")
@@ -270,7 +270,7 @@ class TestChecks(common.ChecksCommon):
         with open(fname_wrong_header, "rb") as f_wrong_header:
             content = f_wrong_header.read()
         assert content.strip().startswith(
-            oca_pre_commit_hooks.checks_odoo_module_xml.XML_HEADER_EXPECTED
+            biz4a_pre_commit_hooks.checks_odoo_module_xml.XML_HEADER_EXPECTED
         ), "The XML wrong header was not fixed"
         with open(fname_wrong_xmlid_order, "rb") as f_wrong_xmlid_order:
             content = f_wrong_xmlid_order.read()

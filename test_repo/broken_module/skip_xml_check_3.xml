@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- oca-hooks : disable=xml-deprecated-data-node,
+<!-- biz4a-hooks : disable=xml-deprecated-data-node,
                     xml-duplicate-record-id -->
 <odoo>
     <data>

@@ -9,8 +9,8 @@ from pathlib import Path
 
 from colorama import init as colorama_init
 
-from oca_pre_commit_hooks import checks_odoo_module_csv, checks_odoo_module_xml, utils
-from oca_pre_commit_hooks.base_checker import BaseChecker
+from biz4a_pre_commit_hooks import checks_odoo_module_csv, checks_odoo_module_xml, utils
+from biz4a_pre_commit_hooks.base_checker import BaseChecker
 
 colorama_init(autoreset=True)
 
@@ -38,7 +38,7 @@ MANIFEST_DATA_EXTS = [
     ".xml",
 ]
 MAX_WEBLATE_NAME_LENGTH = 90
-DATA_MANUAL_KEY = "oca_data_manual"
+DATA_MANUAL_KEY = "biz4a_data_manual"
 BLUE_PILL = "\033[94m🔵\033[0m"
 RED_PILL = "\033[91m🔴\033[0m"
 

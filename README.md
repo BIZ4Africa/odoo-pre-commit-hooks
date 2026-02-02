@@ -2,9 +2,9 @@
 
 [![Build Status](https://github.com/OCA/odoo-pre-commit-hooks/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/OCA/odoo-pre-commit-hooks/actions/workflows/test.yml?query=branch%3Amain)
 [![codecov](https://codecov.io/gh/OCA/odoo-pre-commit-hooks/branch/main/graph/badge.svg)](https://codecov.io/gh/OCA/odoo-pre-commit-hooks)
-[![version](https://img.shields.io/pypi/v/oca-odoo-pre-commit-hooks.svg)](https://pypi.org/project/oca-odoo-pre-commit-hooks)
-[![wheel](https://img.shields.io/pypi/wheel/oca-odoo-pre-commit-hooks.svg)](https://pypi.org/project/oca-odoo-pre-commit-hooks)
-[![supported-versions](https://img.shields.io/pypi/pyversions/oca-odoo-pre-commit-hooks.svg)](https://pypi.org/project/oca-odoo-pre-commit-hooks)
+[![version](https://img.shields.io/pypi/v/biz4a-odoo-pre-commit-hooks.svg)](https://pypi.org/project/biz4a-odoo-pre-commit-hooks)
+[![wheel](https://img.shields.io/pypi/wheel/biz4a-odoo-pre-commit-hooks.svg)](https://pypi.org/project/biz4a-odoo-pre-commit-hooks)
+[![supported-versions](https://img.shields.io/pypi/pyversions/biz4a-odoo-pre-commit-hooks.svg)](https://pypi.org/project/biz4a-odoo-pre-commit-hooks)
 [![commits-since](https://img.shields.io/github/commits-since/OCA/odoo-pre-commit-hooks/v0.2.20.svg)](https://github.com/OCA/odoo-pre-commit-hooks/compare/v0.2.20...main)
 [![code-style-black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
@@ -21,7 +21,7 @@ You don't need to install it directly only configure your ".pre-commit-config.ya
 
 You even can install it directly:
  - Installing from pypi:
-   - `pip install -U oca-odoo-pre-commit-hooks`
+   - `pip install -U biz4a-odoo-pre-commit-hooks`
 
  - Installing from github:
    - `pip install --force-reinstall -U git+https://github.com/OCA/odoo-pre-commit-hooks.git@main`
@@ -36,8 +36,8 @@ Add to your ".pre-commit-config.yaml" configuration file the following input
     - repo: https://github.com/OCA/odoo-pre-commit-hooks
         rev: v0.2.20
         hooks:
-        - id: oca-checks-odoo-module
-        - id: oca-checks-po
+        - id: biz4a-checks-odoo-module
+        - id: biz4a-checks-po
           args: ["--fix"]
 ```
 
@@ -45,8 +45,8 @@ Add to your ".pre-commit-config.yaml" configuration file the following input
 
 If you install directly the package use the entry point:
 
-    oca-checks-odoo-module --help
-    oca-checks-po --help
+    biz4a-checks-odoo-module --help
+    biz4a-checks-po --help
 
 
 # Skip one xml-check for only one file
@@ -55,7 +55,7 @@ If you need to skip one check in one particular XML file you can use the follow 
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<!-- oca-hooks:disable=xml-check-to-skip -->
+<!-- biz4a-hooks:disable=xml-check-to-skip -->
 <odoo>
 ...
 </odoo>
@@ -63,7 +63,7 @@ If you need to skip one check in one particular XML file you can use the follow 
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<!-- oca-hooks:disable=xml-check-to-skip,
+<!-- biz4a-hooks:disable=xml-check-to-skip,
                        xml-check-to-skip2 -->
 <odoo>
 ...
@@ -80,9 +80,9 @@ Behavior can be configured through several methods and as of now only consists o
 ## Enabling or Disabling Checks
 Each available hook consists of multiple checks which can be enabled/disabled using any of the following methods (ordered by priority):
 
-1. As an argument e.g., `oca-checks-odoo --enable=check-to-enable --disable=check-to-disable1,check-to-disable2`
+1. As an argument e.g., `biz4a-checks-odoo --enable=check-to-enable --disable=check-to-disable1,check-to-disable2`
 2. Using environment variables `OCA_HOOKS_ENABLE` or `OCA_HOOKS_DISABLE` e.g., `export OCA_HOOKS_ENABLE=check1,check2`
-3. A configuration file. The path to it can be specified with the argument `--config`. Alternatively a file named `.oca_hooks.cfg`
+3. A configuration file. The path to it can be specified with the argument `--config`. Alternatively a file named `.biz4a_hooks.cfg`
 will be looked for (by default) in the following locations (in order):
    1. Current working directory
    2. Repo's root
@@ -327,7 +327,7 @@ Check syntax of PO files from i18n* folders
 
 # Help
 ```bash
-usage: oca-checks-odoo-module [-h] [--no-verbose] [--no-exit] [--disable DISABLE] [--enable ENABLE] [--config CONFIG] [--list-msgs] [--fix] [files_or_modules ...]
+usage: biz4a-checks-odoo-module [-h] [--no-verbose] [--no-exit] [--disable DISABLE] [--enable ENABLE] [--config CONFIG] [--list-msgs] [--fix] [files_or_modules ...]
 
 positional arguments:
  files_or_modules Odoo __manifest__.py paths or Odoo module paths.
@@ -338,7 +338,7 @@ options:
  --no-exit If enabled so it will not call exit.
  --disable, -d DISABLE Disable the checker with the given 'check-name', separated by commas.
  --enable, -e ENABLE Enable the checker with the given 'check-name', separated by commas. Default: All checks are enabled by default
- --config, -c CONFIG Path to a configuration file (default: .oca_hooks.cfg)
+ --config, -c CONFIG Path to a configuration file (default: .biz4a_hooks.cfg)
  --list-msgs List all currently enabled messages.
  --fix Automatically fix files when possible
 
@@ -351,7 +351,7 @@ options:
 
 # Help PO
 ```bash
-usage: oca-checks-po [-h] [--no-verbose] [--no-exit] [--disable DISABLE] [--enable ENABLE] [--config CONFIG] [--list-msgs] [--fix] [po_files ...]
+usage: biz4a-checks-po [-h] [--no-verbose] [--no-exit] [--disable DISABLE] [--enable ENABLE] [--config CONFIG] [--list-msgs] [--fix] [po_files ...]
 
 positional arguments:
  po_files PO files.
@@ -362,7 +362,7 @@ options:
  --no-exit If enabled so it will not call exit.
  --disable, -d DISABLE Disable the checker with the given 'check-name', separated by commas.
  --enable, -e ENABLE Enable the checker with the given 'check-name', separated by commas. Default: All checks are enabled by default
- --config, -c CONFIG Path to a configuration file (default: .oca_hooks.cfg)
+ --config, -c CONFIG Path to a configuration file (default: .biz4a_hooks.cfg)
  --list-msgs List all currently enabled messages.
  --fix Automatically fix files when possible
 
@@ -392,7 +392,7 @@ options:
 
  * file-not-used
 
-    - https://github.com/OCA/odoo-pre-commit-hooks/blob/v0.2.20/test_repo/broken_module/__openerp__.py#L1 File "broken_module/report/test_report.xml" is not referenced in the manifest. 🔴 If it is loaded from another source (e.g. a post_init_hook script), just add it under the section "oca_data_manual": ["report/test_report.xml",] to be considered. 🔵 Otherwise, you might want to remove it.
+    - https://github.com/OCA/odoo-pre-commit-hooks/blob/v0.2.20/test_repo/broken_module/__openerp__.py#L1 File "broken_module/report/test_report.xml" is not referenced in the manifest. 🔴 If it is loaded from another source (e.g. a post_init_hook script), just add it under the section "biz4a_data_manual": ["report/test_report.xml",] to be considered. 🔵 Otherwise, you might want to remove it.
 
  * manifest-superfluous-key
 

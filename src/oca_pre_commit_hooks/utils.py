@@ -15,9 +15,9 @@ from fixit.config import collect_rules, parse_rule
 from fixit.ftypes import Config
 from packaging.version import InvalidVersion, Version
 
-from oca_pre_commit_hooks.base_checker import BaseChecker
+from biz4a_pre_commit_hooks.base_checker import BaseChecker
 
-CHECKS_DISABLED_REGEX = re.compile(re.escape("oca-hooks:disable=") + r"([a-z\-,]+)")
+CHECKS_DISABLED_REGEX = re.compile(re.escape("biz4a-hooks:disable=") + r"([a-z\-,]+)")
 DEPRECATED_CHECKS_DISABLED_REGEX = re.compile(re.escape("pylint:disable=") + r"([a-z\-,]+)")
 RE_CHECK_DOCSTRING = r"\* Check (?P<check>[\w|\-]+)"
 VALID_HEADER_COMMENTS = (
@@ -32,7 +32,7 @@ VALID_HEADER_COMMENTS = (
     "isort:",
     "noqa:",  # flake8
     "nosec:",  # bandit
-    "oca-hooks:",
+    "biz4a-hooks:",
     "pylint:",
 )
 DFLT_BOOLEAN_FIELDS = [

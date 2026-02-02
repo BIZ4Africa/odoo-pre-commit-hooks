@@ -8,8 +8,8 @@ from typing import Dict, List
 from lxml import etree
 from packaging.version import Version
 
-from oca_pre_commit_hooks import node_xml, utils
-from oca_pre_commit_hooks.base_checker import BaseChecker
+from biz4a_pre_commit_hooks import node_xml, utils
+from biz4a_pre_commit_hooks.base_checker import BaseChecker
 
 DFLT_DEPRECATED_TREE_ATTRS = ["colors", "fonts", "string"]
 DFTL_MIN_PRIORITY = 99
@@ -162,7 +162,7 @@ class ChecksOdooModuleXML(BaseChecker):
     def _get_disabled_checks(self, node, manifest_data):
         """Get the check-name disable comments from etree XML node
 
-        e.g. <!-- oca-hooks:disable=check-name -->
+        e.g. <!-- biz4a-hooks:disable=check-name -->
         """
         all_checks_disabled = set()
         for comment_node in self.xpath_comment(node):
@@ -170,7 +170,7 @@ class ChecksOdooModuleXML(BaseChecker):
             all_checks_disabled |= set(checks_disabled)
             if use_deprecated:
                 print(
-                    f"{manifest_data['filename_short']}:{comment_node.sourceline} WARNING. DEPRECATED. Use oca-disable instead."
+                    f"{manifest_data['filename_short']}:{comment_node.sourceline} WARNING. DEPRECATED. Use biz4a-disable instead."
                 )
         return all_checks_disabled
 
