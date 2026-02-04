@@ -172,7 +172,7 @@ This avoids false positives and prevents introducing syntax errors
 while improving readability and Prettier compatibility.
 
 * Check xml-header-missing
-Generated when the XML file is missing the XML declaration header '<?xml version="1.0" encoding="UTF-8" ?>'
+Generated when the XML file is missing the XML declaration header '<?xml version="1.0" encoding="UTF-8"?>'
 
 * Check xml-header-wrong
 Generated when the XML file declaration header is different than expected (case sensitive).
@@ -511,9 +511,9 @@ options:
 
  * xml-header-wrong
 
-    - https://github.com/BIZ4Africa/odoo-pre-commit-hooks/blob/v/v/v/blob/vrev: v0.2.20/...main.svg/test_repo/broken_module/demo/duplicated_id_demo.xml#L1 XML header expected '<?xml version="1.0" encoding="UTF-8" ?>' but received '<?xml version="1.0" encoding="utf-8"?>'
-    - https://github.com/BIZ4Africa/odoo-pre-commit-hooks/blob/v/v/v/blob/vrev: v0.2.20/...main.svg/test_repo/broken_module/deprecated_disable.xml#L1 XML header expected '<?xml version="1.0" encoding="UTF-8" ?>' but received '<?xml version="1.0" encoding="utf-8" ?>'
-    - https://github.com/BIZ4Africa/odoo-pre-commit-hooks/blob/v/v/v/blob/vrev: v0.2.20/...main.svg/test_repo/broken_module/model_view.xml#L1 XML header expected '<?xml version="1.0" encoding="UTF-8" ?>' but received '<?xml version="1.0" encoding="utf-8"?>'
+    - https://github.com/BIZ4Africa/odoo-pre-commit-hooks/blob/v/v/v/blob/vrev: v0.2.20/...main.svg/test_repo/broken_module/demo/duplicated_id_demo.xml#L1 XML header expected '<?xml version="1.0" encoding="UTF-8"?>' but received '<?xml version="1.0" encoding="utf-8"?>'
+    - https://github.com/BIZ4Africa/odoo-pre-commit-hooks/blob/v/v/v/blob/vrev: v0.2.20/...main.svg/test_repo/broken_module/deprecated_disable.xml#L1 XML header expected '<?xml version="1.0" encoding="UTF-8"?>' but received '<?xml version="1.0" encoding="utf-8" ?>'
+    - https://github.com/BIZ4Africa/odoo-pre-commit-hooks/blob/v/v/v/blob/vrev: v0.2.20/...main.svg/test_repo/broken_module/model_view.xml#L1 XML header expected '<?xml version="1.0" encoding="UTF-8"?>' but received '<?xml version="1.0" encoding="utf-8"?>'
 
  * xml-id-position-first
 

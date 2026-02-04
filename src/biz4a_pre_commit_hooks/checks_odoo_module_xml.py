@@ -13,7 +13,7 @@ from biz4a_pre_commit_hooks.base_checker import BaseChecker
 
 DFLT_DEPRECATED_TREE_ATTRS = ["colors", "fonts", "string"]
 DFTL_MIN_PRIORITY = 99
-XML_HEADER_EXPECTED = b'<?xml version="1.0" encoding="UTF-8" ?>'
+XML_HEADER_EXPECTED = b'<?xml version="1.0" encoding="UTF-8"?>'
 XML_HEADER_RE = re.compile(rb"^<\?xml[^>]*\?>", re.IGNORECASE | re.MULTILINE)
 NUMBER_RE = re.compile(r"^(?P<integer>[+-]?\d+)(?P<decimal>\.\d+)?$")
 XML_PYTHON_ATTRS_RE = re.compile(
@@ -200,7 +200,7 @@ class ChecksOdooModuleXML(BaseChecker):
     @utils.only_required_for_checks("xml-header-missing", "xml-header-wrong")
     def check_xml_header(self):
         """* Check xml-header-missing
-        Generated when the XML file is missing the XML declaration header '<?xml version="1.0" encoding="UTF-8" ?>'
+        Generated when the XML file is missing the XML declaration header '<?xml version="1.0" encoding="UTF-8"?>'
 
         * Check xml-header-wrong
         Generated when the XML file declaration header is different than expected (case sensitive).
@@ -220,7 +220,7 @@ class ChecksOdooModuleXML(BaseChecker):
                     )
                     if self.autofix:
                         with open(manifest_data["filename"], "rb") as f_xml:
-                            content = b'<?xml version="1.0" encoding="UTF-8" ?>\n' + f_xml.read()
+                            content = b'<?xml version="1.0" encoding="UTF-8"?>\n' + f_xml.read()
                         utils.perform_fix(manifest_data["filename"], content)
                         self.update_node(manifest_data)  # update sourceline after insert a new line
             elif self.is_message_enabled("xml-header-wrong", manifest_data["disabled_checks"]):
