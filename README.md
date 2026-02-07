@@ -201,6 +201,10 @@ If the record id is not in the first position
 It should be the first
 `<record id="xmlid_name1" ...`
 
+* Check xml-view-xmlid-order
+Ensure view inheritance xmlids are defined before they are referenced (inherit_id, t-inherit, t-extend).
+This usually means reordering XML files in the manifest.
+
 * Check xml-field-bool-without-eval
 
 if the record is boolean but without eval attribute

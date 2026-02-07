@@ -44,6 +44,7 @@ XML_PYTHON_ATTRS_RE = re.compile(
     )
     + ")$"
 )
+XMLID_REF_RE = re.compile(r"ref\(\s*['\"](?P<xmlid>[^'\"]+)['\"]\s*\)")
 
 
 # Same as Odoo: https://github.com/odoo/odoo/commit/9cefa76988ff94c3d590c6631b604755114d0297
@@ -197,6 +198,39 @@ class ChecksOdooModuleXML(BaseChecker):
         replaces = cls.xpath_view_replaces(arch)
         return bool(replaces)
 
+    def _normalize_xmlid(self, xmlid):
+        if not xmlid:
+            return ""
+        if "." in xmlid:
+            xmlid_module, xmlid_name = xmlid.split(".", 1)
+            if xmlid_module != self.module_name:
+                return ""
+            return xmlid_name
+        return xmlid
+
+    def _collect_defined_xmlids(self):
+        definitions = defaultdict(list)
+        for file_index, manifest_data in enumerate(self.manifest_datas):
+            if manifest_data["file_error"]:
+                continue
+            for record in self.xpath_record(manifest_data["node"]):
+                xmlid = self._normalize_xmlid(record.get("id"))
+                if not xmlid:
+                    continue
+                definitions[xmlid].append(
+                    (file_index, record.sourceline or 0, manifest_data["filename_short"])
+                )
+            for template in self.xpath_template(manifest_data["node"]):
+                xmlid = self._normalize_xmlid(template.get("id"))
+                if not xmlid:
+                    continue
+                definitions[xmlid].append(
+                    (file_index, template.sourceline or 0, manifest_data["filename_short"])
+                )
+        for xmlid, locations in definitions.items():
+            definitions[xmlid] = sorted(locations, key=lambda item: (item[0], item[1]))
+        return definitions
+
     @utils.only_required_for_checks("xml-header-missing", "xml-header-wrong")
     def check_xml_header(self):
         """* Check xml-header-missing
@@ -317,6 +351,105 @@ class ChecksOdooModuleXML(BaseChecker):
                 line=fields[0][1].sourceline,
                 extra_positions=[(field[0]["filename_short"], field[1].sourceline) for field in fields[1:]],
             )
+
+    @utils.only_required_for_checks("xml-view-xmlid-order")
+    def check_xml_view_xmlid_order(self):
+        """* Check xml-view-xmlid-order
+        Ensure view inheritance xmlids are defined before they are referenced."""
+        definitions = self._collect_defined_xmlids()
+        defined_xmlids = set()
+        for file_index, manifest_data in enumerate(self.manifest_datas):
+            if manifest_data["file_error"]:
+                continue
+            elements = [
+                ("record", record) for record in self.xpath_record(manifest_data["node"])
+            ] + [("template", template) for template in self.xpath_template(manifest_data["node"])]
+            elements.sort(key=lambda item: item[1].sourceline or 0)
+            for elem_type, element in elements:
+                if self.is_message_enabled("xml-view-xmlid-order", manifest_data["disabled_checks"]):
+                    self._check_view_xmlid_references(
+                        manifest_data,
+                        element,
+                        elem_type,
+                        definitions,
+                        defined_xmlids,
+                        file_index,
+                    )
+                xmlid = self._normalize_xmlid(element.get("id"))
+                if xmlid:
+                    defined_xmlids.add(xmlid)
+
+    def _check_view_xmlid_references(
+        self,
+        manifest_data,
+        element,
+        elem_type,
+        definitions,
+        defined_xmlids,
+        file_index,
+    ):
+        if elem_type == "record":
+            if element.get("model") != "ir.ui.view":
+                return
+            target_fields = element.xpath("./field[@name='inherit_id']")
+            for field in target_fields:
+                if ref_attr := field.get("ref"):
+                    self._validate_view_xmlid_order(
+                        manifest_data,
+                        ref_attr,
+                        definitions,
+                        defined_xmlids,
+                        file_index,
+                        field.sourceline or 0,
+                    )
+                if eval_attr := field.get("eval"):
+                    for match in XMLID_REF_RE.finditer(eval_attr):
+                        self._validate_view_xmlid_order(
+                            manifest_data,
+                            match.group("xmlid"),
+                            definitions,
+                            defined_xmlids,
+                            file_index,
+                            field.sourceline or 0,
+                        )
+        elif elem_type == "template":
+            for attr in ("inherit_id", "t-inherit", "t-extend"):
+                if not (xmlid := element.get(attr)):
+                    continue
+                self._validate_view_xmlid_order(
+                    manifest_data,
+                    xmlid,
+                    definitions,
+                    defined_xmlids,
+                    file_index,
+                    element.sourceline or 0,
+                )
+
+    def _validate_view_xmlid_order(
+        self,
+        manifest_data,
+        xmlid,
+        definitions,
+        defined_xmlids,
+        file_index,
+        line,
+    ):
+        normalized = self._normalize_xmlid(xmlid)
+        if not normalized or normalized in defined_xmlids:
+            return
+        current_position = (file_index, line)
+        for def_file_index, def_line, def_file in definitions.get(normalized, []):
+            if (def_file_index, def_line) <= current_position:
+                continue
+            self.register_error(
+                code="xml-view-xmlid-order",
+                message=f"View xmlid `{xmlid}` used before it is loaded",
+                info="Move the XML definition earlier in the manifest or above this view.",
+                filepath=manifest_data["filename_short"],
+                line=line,
+                extra_positions=[(def_file, def_line)],
+            )
+            return
 
     @utils.only_required_for_checks("xml-syntax-error")
     def check_xml_syntax_error(self):
