@@ -56,6 +56,7 @@ EXPECTED_ERRORS = {
     "xml-deprecated-oe-chatter": 1,
     "xml-field-bool-without-eval": 2,
     "xml-field-numeric-without-eval": 7,
+    "xml-view-xmlid-order": 1,
 }
 
 
